@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src = "../echarts.common.js"></script>
+
+</head>
+<body>
+<div id="main" style="width:800px;height: 800px"></div>
+    <script type="text/javascript">
+        var chartDom = document.getElementById('main');
+        var myChart = echarts.init(chartDom);
+        var option;
+
+        option = {
+          title: {
+            text: 'World Population'
+          },
+          tooltip: {
+            trigger: 'axis',
+            axisPointer: {
+              type: 'shadow'
+            }
+          },
+          legend: {},
+          grid: {
+            left: '3%',
+            right: '4%',
+            bottom: '3%',
+            containLabel: true
+          },
+          xAxis: {
+            type: 'value',
+            boundaryGap: [0, 0.01]
+          },
+          yAxis: {
+            type: 'category',
+            data: [{% for item in items %}
+           		"{{ item[0]}}",
+       			{% endfor %}]
+          },
+          series: [
+            {
+              name: '浏览量',
+              type: 'bar',
+              data: [{% for item in items %}'{{ item[1] }}', {% endfor %}]
+            },
+            {
+              name: '招聘人数',
+              type: 'bar',
+              data: [19325, 23438, 31000, 121594, 134141, 681807,49599,34345]
+            }
+          ]
+        };
+        option && myChart.setOption(option);
+    </script>
+
+</body>
+</html>
